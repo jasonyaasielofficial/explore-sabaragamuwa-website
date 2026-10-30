@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Packages | Explore Sabaragamuwa</title>
+    <link rel="stylesheet" href="packages.css">
+</head>
+<body>
+
+<header class="top-header">
+    <div class="nav-wrapper">
+        <a href="../index.html" class="brand-logo">
+            <span class="logo-icon-badge">🏔️</span>
+            <span class="logo-text-main">Explore</span>
+            <span class="highlight">Sabaragamuwa</span>
+        </a>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../destination/destination.html" class="nav-link">Destination</a></li>
+                <li><a href="packages.html" class="nav-link active">Package</a></li>
+                <li><a href="../map/map-feedback.html" class="nav-link">Map & Feedback</a></li>
+                <li><a href="../contact/contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+    <section class="page-hero">
+        <h1>Build Your <span>Package</span></h1>
+        <p>Tell us about your group, choose your places, and see transport, food, stay and packing details with an estimated budget.</p>
+    </section>
+
+    <section class="planner" aria-labelledby="plannerTitle">
+        <div class="section-heading">
+            <span class="section-label">STEP 1 · YOUR TRIP</span>
+            <h2 id="plannerTitle">Tell Us About Your Trip</h2>
+            <p>These details shape your transport, stay and food estimates.</p>
+        </div>
+
+        <div class="trip-form">
+            <div class="field">
+                <label for="distanceBand">Distance you travel from</label>
+                <select id="distanceBand">
+                    <option value="10-20">10 km to 20 km</option>
+                    <option value="20-60">20 km to 60 km</option>
+                    <option value="60-100">60 km to 100 km</option>
+                    <option value="100-180">100 km to 180 km</option>
+                    <option value="200+">Over 200 km</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="members">Number of members</label>
+                <input type="number" id="members" min="1" max="50" value="2" inputmode="numeric">
+            </div>
+
+            <div class="field">
+                <label for="days">Days you will stay</label>
+                <input type="number" id="days" min="1" max="30" value="3" inputmode="numeric">
+            </div>
+
+            <div class="field">
+                <label for="perRoom">Guests per room</label>
+                <select id="perRoom">
+                    <option value="1">1 guest</option>
+                    <option value="2" selected>2 guests</option>
+                    <option value="3">3 guests</option>
+                    <option value="4">4 guests</option>
+                </select>
+            </div>
+        </div>
+
+        <label class="check-field">
+            <input type="checkbox" id="fitStay">
+            Only show places that fit my number of days
+        </label>
+        <p class="form-message" id="tripMsg" role="alert"></p>
+    </section>
+
+    <section class="finder" aria-labelledby="finderTitle">
+
+        <div class="section-heading">
+            <span class="section-label">STEP 2 · SEARCH &amp; FILTER</span>
+            <h2 id="finderTitle">Find Destinations</h2>
+            <p>Type a place, activity or district, then narrow the list by category.</p>
+        </div>
+
+        <div class="toolbar">
+            <div class="search-box">
+                <span class="search-icon" aria-hidden="true">⌕</span>
+                <label for="searchInput" class="sr-only">Search destinations</label>
+                <input type="search" id="searchInput"
+                       placeholder="Try 'waterfall', 'elephant' or 'Kegalle'..." autocomplete="off">
+                <button type="button" id="clearSearch" class="clear-btn" aria-label="Clear search" hidden>&times;</button>
+            </div>
+
+            <div class="toolbar-selects">
+                <label class="select-wrap">
+                    <span>District</span>
+                    <select id="districtFilter">
+                        <option value="all">All Districts</option>
+                        <option value="ratnapura">Ratnapura</option>
+                        <option value="kegalle">Kegalle</option>
+                    </select>
+                </label>
+                <label class="select-wrap">
+                    <span>Sort by</span>
+                    <select id="sortSelect">
+                        <option value="default">Recommended</option>
+                        <option value="az">Name (A to Z)</option>
+                        <option value="za">Name (Z to A)</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <div class="category-filters" id="categoryFilters" role="group" aria-label="Filter by category"></div>
+
+        <div class="results-bar">
+            <p id="resultCount" aria-live="polite"></p>
+            <button type="button" class="reset-link js-reset">Reset all filters</button>
+        </div>
+
+        <div class="package-grid" id="packageGrid"></div>
+
+        <div class="no-results" id="noResults" hidden>
+            <span>🌿</span>
+            <h3>No destinations found</h3>
+            <p>Try another search term, a different district, another category or a different number of days.</p>
+            <button type="button" class="js-reset">Show All Destinations</button>
+        </div>
+    </section>
+
+    <section class="trip-section" aria-labelledby="tripTitle">
+        <div class="section-heading">
+            <span class="section-label">STEP 3 · YOUR TRIP &amp; BUDGET</span>
+            <h2 id="tripTitle">My Trip &amp; Estimated Budget</h2>
+            <p>Add places above with "+ Add to my trip", then choose your transport, where to stay and where to eat.</p>
+        </div>
+
+        <div class="trip-layout">
+            <div class="trip-places">
+                <h3>Places in my trip</h3>
+                <p class="empty-trip" id="emptyTrip">No places added yet.</p>
+                <ul class="trip-list" id="selectedList"></ul>
+
+                <div class="choice-field">
+                    <label for="stayChoice">Where I will stay</label>
+                    <select id="stayChoice"></select>
+                </div>
+                <div class="choice-field">
+                    <label for="restaurantChoice">Where I will eat</label>
+                    <select id="restaurantChoice"></select>
+                </div>
+            </div>
+
+            <aside class="budget-card" aria-labelledby="budgetTitle">
+                <h3 id="budgetTitle">Estimated budget</h3>
+                <dl class="budget-list" id="budgetList"></dl>
+                <p class="budget-note" id="budgetNote"></p>
+            </aside>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="footer-columns-wrapper">
+        <div class="footer-col">
+            <h3><span class="footer-logo-icon">🏔️</span> Explore Sabaragamuwa</h3>
+            <p>Dedicated to promoting sustainable eco-tourism, cultural heritage and natural exploration across Sabaragamuwa Province, Sri Lanka.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Navigation</h4>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../destination/destination.html">Destination</a></li>
+                <li><a href="packages.html">Package</a></li>
+                <li><a href="../map/map-feedback.html">Map & Feedback</a></li>
+                <li><a href="../contact/contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Explore More</h4>
+            <ul>
+                <li><a href="../destination/destination.html#belihuloya">Belihuloya</a></li>
+                <li><a href="../destination/destination.html#bopath">Bopath Ella</a></li>
+                <li><a href="../destination/destination.html#kitulgala">Kitulgala</a></li>
+                <li><a href="../destination/destination.html#explore">All Destinations</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact &amp; Info</h4>
+            <p>📍 Group 15 | Faculty of Computing<br>Sabaragamuwa University of Sri Lanka</p>
+            <p>📞 +94 (0)77 377 4288</p>
+            <p>✉️ info@exploresabaragamuwa.lk</p>
+        </div>
+    </div>
+    <div class="footer-bottom-bar">
+        <p>&copy; Group 15 IS1106 | 2026 Explore Sabaragamuwa Tourism Assignment Project | All Rights Reserved.</p>
+        <p>Designed with HTML5, CSS3 &amp; JavaScript.</p>
+    </div>
+</footer>
+
+<script src="packages-data.js"></script>
+<script src="packages.js"></script>
+
+</body>
+</html>
